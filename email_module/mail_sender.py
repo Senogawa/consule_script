@@ -2,6 +2,9 @@ import smtplib
 from email.mime.text import MIMEText
 from loader import mail_data
 
+
+
+
 def send_email():
     """
     Модуль для отправки сообщения на почту

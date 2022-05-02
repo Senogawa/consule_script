@@ -1,4 +1,6 @@
 import schedule
+import sys
+print(sys.path)
 
 from broser_model.checker import check_info
 from broser_model.auth_module import authorization

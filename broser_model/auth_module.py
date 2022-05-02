@@ -30,7 +30,13 @@ def authorization(username: str, password: str) -> webdriver.Firefox:
     Аутентификация аккаунта
     Возвращает браузер, для функции checker.check_info
     """
+    try_counts = 0
     while True:
+        if try_counts == 4:
+            print("|INFO| Authorization captcha not valide |INFO|")
+            broser.quit()
+            return "Not valide"
+
         options = webdriver.ChromeOptions()
         options.add_argument(f"user-agent={UserAgent().random}")
         options.add_argument("--disable-blink-features=AutomationControlled")
@@ -44,16 +50,16 @@ def authorization(username: str, password: str) -> webdriver.Firefox:
         broser.find_element(By.XPATH,"//input[@type='checkbox']").click()
 
         code = get_token("https://cgifederal.secure.force.com/","8dcc6f44-097e-4720-83f1-a87f7ad8e756")
-        #WebDriverWait(broser, 10).until(expected_conditions.presence_of_element_located((By.CSS_SELECTOR, ".h-captcha > iframe:nth-child(1)")))
         broser.execute_script("document.querySelector(" + "'" + '[name="h-captcha-response"]' + "'" + ").innerHTML= " + "'" + code + "'")
         print("captcha inputed")
-        time.sleep(2)
+        time.sleep(2) #debug
         broser.find_element(By.XPATH, "//input[@id='loginPage:SiteTemplate:siteLogin:loginComponent:loginForm:loginButton']").click()
         time.sleep(2)
         if "Error" not in broser.page_source:
             return broser
         else:
-            print("Not valide captcha")
+            print("|INFO| Not valide captcha |INFO|")
+            try_counts += 1
             broser.quit()
     
 
