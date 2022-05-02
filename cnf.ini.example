@@ -1,0 +1,11 @@
+[USER]
+username = 
+password = 
+
+[EMAIL]
+from_mail = 
+from_mail_password = 
+to_mail = 
+
+[CAPTCHA]
+api_key = 
