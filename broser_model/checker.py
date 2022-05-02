@@ -23,7 +23,7 @@ def check_info(broser: webdriver.Firefox):
         time.sleep(sleep_time)
 
     if broser == "Not valide":
-        print("|INFO| Next try through 3 hours |INFO|")
+        print("|INFO| Next try through 4 hours |INFO|")
         return
 
     time.sleep(10)
@@ -57,7 +57,7 @@ def check_info(broser: webdriver.Firefox):
     time.sleep(0.5)
     find_xpath(broser, "//input[@value='Continue']", 7)
     print("|INFO| Step 8 was finished |INFO|")
-    
+
     check_counts = 0
     while True:
         if check_counts == 3:
@@ -75,6 +75,7 @@ def check_info(broser: webdriver.Firefox):
             break
 
         if "I am human" in broser.page_source:
+            print("Not valide captcha")
             broser.switch_to.default_content()
             check_counts += 1
             continue

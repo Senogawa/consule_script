@@ -30,6 +30,8 @@ def authorization(username: str, password: str) -> webdriver.Firefox:
     Аутентификация аккаунта
     Возвращает браузер, для функции checker.check_info
     """
+
+    print("|INFO| START WORKING! |INFO|")
     try_counts = 0
     while True:
         if try_counts == 4:
@@ -51,19 +53,21 @@ def authorization(username: str, password: str) -> webdriver.Firefox:
 
         code = get_token("https://cgifederal.secure.force.com/","8dcc6f44-097e-4720-83f1-a87f7ad8e756")
         broser.execute_script("document.querySelector(" + "'" + '[name="h-captcha-response"]' + "'" + ").innerHTML= " + "'" + code + "'")
-        print("captcha inputed")
-        time.sleep(2) #debug
+        print("Captcha Inputed")
+        print(broser.page_source)
+        #time.sleep(200) #debug
         broser.find_element(By.XPATH, "//input[@id='loginPage:SiteTemplate:siteLogin:loginComponent:loginForm:loginButton']").click()
-        time.sleep(2)
+        time.sleep(7)
         if "Error" not in broser.page_source:
+            print("Authentification success")
             return broser
         else:
-            print("|INFO| Not valide captcha |INFO|")
+            print("|INFO| Cannot validate captcha |INFO|")
             try_counts += 1
             broser.quit()
     
 
 
 if __name__ == "__main__":
-    authorization(user_data["username"], user_data["password"])
+    print(get_token("https://cgifederal.secure.force.com/","8dcc6f44-097e-4720-83f1-a87f7ad8e756"))
    
