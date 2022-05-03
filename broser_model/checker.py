@@ -83,7 +83,7 @@ def check_info(broser: webdriver.Firefox):
     broser.switch_to.default_content()        
     if "There are currently no appointments available." not in broser.page_source:
         print("|INFO| New schedule |INFO|")
-        send_email()
+        send_email("Посольство: Расписание встреч", "На сайте появились рассписания встреч \n Проверьте сайт")
     else:
         print("|INFO| no schedule |INFO|")
         broser.quit()
