@@ -55,7 +55,7 @@ def authorization(username: str, password: str) -> webdriver.Firefox:
         code = get_token("https://cgifederal.secure.force.com/","8dcc6f44-097e-4720-83f1-a87f7ad8e756")
         broser.execute_script("document.querySelector(" + "'" + '[name="h-captcha-response"]' + "'" + ").innerHTML= " + "'" + code + "'")
         print("Captcha Inputed")
-        print(broser.page_source)
+        #print(broser.page_source)
         #time.sleep(200) #debug
         broser.find_element(By.XPATH, "//input[@id='loginPage:SiteTemplate:siteLogin:loginComponent:loginForm:loginButton']").click()
         time.sleep(7)
