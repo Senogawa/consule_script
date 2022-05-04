@@ -43,6 +43,7 @@ def authorization(username: str, password: str) -> webdriver.Firefox:
         options.add_argument(f"user-agent={UserAgent().random}")
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
         broser = webdriver.Chrome(executable_path = "./chromedriver", options = options)
         
         broser.get("https://cgifederal.secure.force.com/")
