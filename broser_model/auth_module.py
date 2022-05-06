@@ -1,9 +1,13 @@
+from lib2to3.pgen2 import driver
+from re import A
 from socket import timeout
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 from python3_anticaptcha import HCaptchaTaskProxyless
 from fake_useragent import UserAgent
+import pickle
+import os
 
 from loader import user_data
 from loader import captcha_data
@@ -51,12 +55,13 @@ def authorization(username: str, password: str) -> webdriver.Firefox:
         broser.find_element(By.XPATH,"//input[@id='loginPage:SiteTemplate:siteLogin:loginComponent:loginForm:username']").send_keys(username)
         broser.find_element(By.XPATH,"//input[@id='loginPage:SiteTemplate:siteLogin:loginComponent:loginForm:password']").send_keys(password)
         broser.find_element(By.XPATH,"//input[@type='checkbox']").click()
+        print("|INFO| User data inputed |INFO|")
 
         code = get_token("https://cgifederal.secure.force.com/","8dcc6f44-097e-4720-83f1-a87f7ad8e756")
         broser.execute_script("document.querySelector(" + "'" + '[name="h-captcha-response"]' + "'" + ").innerHTML= " + "'" + code + "'")
         print("Captcha Inputed")
         #print(broser.page_source)
-        #time.sleep(200) #debug
+        time.sleep(2) #debug
         broser.find_element(By.XPATH, "//input[@id='loginPage:SiteTemplate:siteLogin:loginComponent:loginForm:loginButton']").click()
         time.sleep(7)
         if "Error" not in broser.page_source:
@@ -70,5 +75,5 @@ def authorization(username: str, password: str) -> webdriver.Firefox:
 
 
 if __name__ == "__main__":
-    print(get_token("https://cgifederal.secure.force.com/","8dcc6f44-097e-4720-83f1-a87f7ad8e756"))
+    print(authorization())
    
