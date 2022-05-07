@@ -7,7 +7,7 @@ import time
 from loader import user_data
 from broser_model.auth_module import authorization
 from broser_model.auth_module import get_token
-from email_module.mail_sender import send_email
+from email_module.mail_sender import send_telegram_message
 
 def check_info(broser: webdriver.Firefox):
     """
@@ -83,7 +83,8 @@ def check_info(broser: webdriver.Firefox):
     broser.switch_to.default_content()        
     if "There are currently no appointments available." not in broser.page_source:
         print("|INFO| New schedule |INFO|")
-        send_email("Посольство: Расписание встреч", "На сайте появились рассписания встреч \n Проверьте сайт")
+        send_telegram_message("Посольство: Расписание встреч\nНа сайте появились рассписания встреч\nПроверьте сайт")
+        #send_email("Посольство: Расписание встреч", "На сайте появились рассписания встреч \n Проверьте сайт")
     else:
         print("|INFO| no schedule |INFO|")
         broser.quit()

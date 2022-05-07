@@ -26,4 +26,6 @@ def send_telegram_message(text: str):
     requests.get(f"https://api.telegram.org/bot{bot_data['token']}/sendMessage?chat_id={bot_data['chat_id']}&text={text}")
 
 if __name__ == "__main__":
-    send_telegram_message("| INFO | Начинаю работу | INFO |")
+    #send_telegram_message("| INFO | Начинаю работу | INFO |")
+    #send_telegram_message("Посольство: Расписание встреч\nНа сайте появились рассписания встреч\nПроверьте сайт")
+    send_telegram_message(f"Уведомление о работе\nПродолжаю работу\n{datetime.now().strftime('%H-%M-%S : %d-%m-%Y')}")
